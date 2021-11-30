@@ -1,13 +1,13 @@
 import React from 'react';
-import DataTable from "./components/DataTable";
-import {PageContainer} from "@ant-design/pro-layout";
+import { PageContainer } from '@ant-design/pro-layout';
+import DataTable from './components/DataTable';
 
 const Index = () => {
   return (
     <PageContainer>
-      <DataTable/>
+      <DataTable />
     </PageContainer>
-  )
-}
+  );
+};
 
 export default Index;
