@@ -47,9 +47,7 @@ export const layout = ({ initialState }) => {
   return {
     rightContentRender: () => <RightContent />,
     disableContentMargin: false,
-    waterMarkProps: {
-      content: initialState?.currentUser?.name,
-    },
+    waterMarkProps: { content: initialState?.currentUser?.name },
     footerRender: () => <Footer />,
     onPageChange: () => {
       const { location } = history; // 如果没有登录，重定向到 login
@@ -60,17 +58,23 @@ export const layout = ({ initialState }) => {
     },
     links: isDev
       ? [
-          <Link to="/umi/plugin/openapi" target="_blank">
+          <Link to="/umi/plugin/openapi" target="_blank" key="OpenApi">
             <LinkOutlined />
             <span>OpenAPI 文档</span>
           </Link>,
-          <Link to="/~docs">
+          <Link to="/~docs" key="Business">
             <BookOutlined />
             <span>业务组件文档</span>
           </Link>,
         ]
       : [],
     menuHeaderRender: undefined,
+    /*menu: {
+      params: initialState,
+      request: async (params, defaultMenuData) => {
+        return initialState.menuData;
+      },
+    },*/
     // 自定义 403 页面
     // unAccessible: <div>unAccessible</div>,
     // 增加一个 loading 的状态
