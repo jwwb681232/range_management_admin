@@ -23,7 +23,7 @@ const Login = () => {
     const userInfo = await initialState?.fetchUserInfo?.();
 
     if (userInfo) {
-      await setInitialState((s) => ({ ...s, currentUser: userInfo }));
+      await setInitialState((s) => ({ ...s, administrator: userInfo }));
     }
   };
 
@@ -31,8 +31,10 @@ const Login = () => {
     try {
       // 登录
       const response = await login({ ...values, type });
+      console.log(response);
       if (response.status === 'success') {
         message.success(response.message);
+        localStorage.setItem('token', response.data.token);
 
         await fetchUserInfo();
 

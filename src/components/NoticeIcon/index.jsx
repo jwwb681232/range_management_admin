@@ -65,7 +65,7 @@ const getUnreadData = (noticeData) => {
 
 const NoticeIconView = () => {
   const { initialState } = useModel('@@initialState');
-  const { currentUser } = initialState || {};
+  const { administrator } = initialState || {};
   const [notices, setNotices] = useState([]);
   const { data } = useRequest(getNotices);
   useEffect(() => {
@@ -106,7 +106,7 @@ const NoticeIconView = () => {
   return (
     <NoticeIcon
       className={styles.action}
-      count={currentUser && currentUser.unreadCount}
+      count={administrator && administrator.unreadCount}
       onItemClick={(item) => {
         changeReadState(item.id);
       }}

@@ -14,6 +14,7 @@ const loginOut = async () => {
   await outLogin();
   const { query = {}, search, pathname } = history.location;
   const { redirect } = query; // Note: There may be security issues, please note
+  localStorage.removeItem('token');
 
   if (window.location.pathname !== '/user/login' && !redirect) {
     history.replace({
@@ -32,7 +33,7 @@ const AvatarDropdown = ({ menu }) => {
       const { key } = event;
 
       if (key === 'logout') {
-        setInitialState((s) => ({ ...s, currentUser: undefined }));
+        setInitialState((s) => ({ ...s, administrator: undefined }));
         loginOut();
         return;
       }
@@ -57,9 +58,9 @@ const AvatarDropdown = ({ menu }) => {
     return loading;
   }
 
-  const { currentUser } = initialState;
+  const { administrator } = initialState;
 
-  if (!currentUser || !currentUser.name) {
+  if (!administrator || !administrator.name) {
     return loading;
   }
 
@@ -88,8 +89,8 @@ const AvatarDropdown = ({ menu }) => {
   return (
     <HeaderDropdown overlay={menuHeaderDropdown}>
       <span className={`${styles.action} ${styles.account}`}>
-        <Avatar size="small" className={styles.avatar} src={currentUser.avatar} alt="avatar" />
-        <span className={`${styles.name} anticon`}>{currentUser.name}</span>
+        <Avatar size="small" className={styles.avatar} src={administrator.avatar} alt="avatar" />
+        <span className={`${styles.name} anticon`}>{administrator.name}</span>
       </span>
     </HeaderDropdown>
   );

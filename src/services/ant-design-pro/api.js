@@ -4,8 +4,8 @@
 //import { request } from 'umi';
 import request from '../../utils/request';
 
-/** 获取当前的用户 GET /api/currentUser */
-export async function currentUser(options) {
+/** 获取当前的用户 GET /api/administrator */
+export async function administrator(options) {
   return request('/api/profile', {
     method: 'GET',
     headers: {
@@ -18,7 +18,7 @@ export async function currentUser(options) {
 
 /** 退出登录接口 POST /api/login/outLogin */
 export async function outLogin(options) {
-  return request('/api/login/outLogin', {
+  return request('/api/auth/logout', {
     method: 'POST',
     ...(options || {}),
   });
@@ -28,9 +28,6 @@ export async function outLogin(options) {
 export async function login(body, options) {
   return request('/api/auth/login', {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
     data: body,
     ...(options || {}),
   });

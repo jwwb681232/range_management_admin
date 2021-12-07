@@ -3,7 +3,7 @@ import { history, Link } from 'umi';
 import RightContent from '@/components/RightContent';
 import Footer from '@/components/Footer';
 import { BookOutlined, LinkOutlined } from '@ant-design/icons';
-import { currentUser as queryCurrentUser } from './services/ant-design-pro/api';
+import { administrator as queryCurrentUser } from './services/ant-design-pro/api';
 
 const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/user/login';
@@ -29,10 +29,10 @@ export async function getInitialState() {
   }; // 如果是登录页面，不执行
 
   if (history.location.pathname !== loginPath) {
-    const currentUser = await fetchUserInfo();
+    const administrator = await fetchUserInfo();
     return {
       fetchUserInfo,
-      currentUser,
+      administrator,
       settings: {},
     };
   }
@@ -47,12 +47,12 @@ export const layout = ({ initialState }) => {
   return {
     rightContentRender: () => <RightContent />,
     disableContentMargin: false,
-    waterMarkProps: { content: initialState?.currentUser?.name },
+    waterMarkProps: { content: initialState?.administrator?.name },
     footerRender: () => <Footer />,
     onPageChange: () => {
       const { location } = history; // 如果没有登录，重定向到 login
 
-      if (!initialState?.currentUser && location.pathname !== loginPath) {
+      if (!initialState?.administrator && location.pathname !== loginPath) {
         history.push(loginPath);
       }
     },
