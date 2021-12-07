@@ -30,4 +30,19 @@ const request = extend({
   credentials: 'include',
 });
 
+// request拦截器, 改变url 或 options.
+request.interceptors.request.use(async (url, options) => {
+  return {
+    url: url,
+    options: {
+      ...options,
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      },
+    },
+  };
+});
+
 export default request;
